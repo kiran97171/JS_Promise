@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="text-align: center; font-size: x-large; color: brown;">Promise</h1>
+    <pre>Que1 : Write one example explaining how you can write a callback function.</pre>
+    <p>Ans:</p>
+    <pre>function message(){
+      console.log("Hello World");
+    }
+    setTimeout(message,3000);</pre><br>
+    <pre>Que2 : "Write a callback function to print numbers from 1 to 7, in which 1 should be printed <br>
+         after 1 sec, 2 should be printed after 2 sec, 3 should be printed after 3 sec, and so on. 
+
+        Explain callback hell.
+        Numbers
+        1
+        2
+        3
+        4
+        5
+        6
+        7"</pre>
+    <p>Ans:</p>
+    <pre>function m2(){
+        for(let i=1;i<=7;i++){
+          setTimeout(()=>{
+            console.log(i);
+          },i*1000);
+        }
+      }
+      m2();</pre><br>
+    <pre>Que 3 : "Write the promise function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, <br>
+         2 should be printed after 2 sec, 3 should be printed after 3 sec, and so on. 
+
+        Numbers
+        1
+        2
+        3
+        4
+        5
+        6
+        7"</pre>
+    <p>Ans:</p>
+    <pre>function print(num){
+        return new Promise((resolve)=>{
+          setTimeout(()=>{
+            console.log(num);
+            resolve();
+          },1000)
+        });
+      }
+      let demo=Promise.resolve();
+      for(let i=1;i<=7;i++){
+        demo=demo.then(()=>print(i));
+      }</pre><br>
+    <pre>Que 4 : "Create a promise function accepting an argument, if yes is passed to the function then it <br>
+         should go to resolved state and print Promise Resolved, and if nothing is passed 
+        then it should go to reject the state and catch the error and print Promise Rejected "</pre>
+    <p>Ans:</p>
+    <pre>function print(a){
+      return new Promise((res,rej)=>{
+        if(a==="yes"){
+          res("Promise Resolved");
+        }
+        else{
+          rej("Promise Rejected");
+        }
+      });
+    }
+    print("yes")
+    .then((result)=>{console.log(result)})
+    .catch((error)=>{console.log(error)})</pre><br>
+    <pre>Que5 : Create examples to explain callback function</pre>
+    <p>Ans:</p>
+    <pre>function greeting(name, callback) {
+      console.log("Hello " + name );
+      callback();
+    }
+    
+    function greetMessage() {
+      console.log("Good Morning!");
+    }
+    
+    greeting("Shivam", greetMessage);</pre><br>
+    <pre>Que 6 : Create examples to explain callback hell function</pre>
+    <p>Ans:</p>
+    <pre>function a(callback1){
+      console.log("a");
+      callback1();
+    }
+    function b(callback2){
+      console.log("b");
+      callback2();
+    }
+    function c(callback3){
+      console.log("c");
+      callback3();
+    }
+    function d(callback4){
+      console.log("d");
+      callback4();
+    }
+    a(()=>{
+      b(()=>{
+        c(()=>{
+          d(()=>{
+          });
+        });
+      });
+    });</pre><br>
+    <pre>Que 7 : Create examples to explain promises function</pre>
+    <p>Ans:</p>
+    <pre>function greet(a) {
+      return new Promise((resolve, reject) => {
+          if (a==="Good Morning") {
+            resolve("Good Morning!");
+          } else {
+            reject("Good Night!");
+          }
+    })
+    }
+    greet("Good Morning")
+      .then((result) => {console.log(result)})
+      .catch((error) => {console.log(error)});</pre><br>
+    <pre>Que 8 : Create examples to explain async await function</pre>
+    <p>Ans:</p>
+    <pre>var demo=new Promise((res)=>{
+      setTimeout(()=>{
+        res("promise resolved");
+      },2000)
+    })
+    async function sample(){
+      let a=await demo;
+      console.log(a);
+      console.log("This is async method");
+    }
+    sample();</pre><br>
+    <pre>Que 9 : Create examples to explain promise.all function</pre>
+    <p>Ans:</p>
+    <pre>const pro1 = new Promise((resolve, reject) => {
+      setTimeout(() => 
+      resolve('Promise 1 resolved'), 2000);
+    });
+    
+    const pro2 = new Promise((resolve, reject) => {
+      setTimeout(() => resolve('Promise 2 resolved'), 1000);
+    });
+    
+    const pro3 = new Promise((resolve, reject) => {
+      setTimeout(() => resolve('Promise 3 resolved'), 3000);
+    });
+    
+    Promise.all([pro1, pro2, pro3])
+      .then((values) => 
+      console.log(values))
+      .catch((error) => 
+      console.log(error));
+</pre><br>
+</body>
+</html>
